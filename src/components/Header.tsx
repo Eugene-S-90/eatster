@@ -2,10 +2,15 @@ import { useEffect, useRef } from 'react'
 import { useRestaurantStore } from '../store/useRestorauntStore'
 import { Skeleton } from './Skeleton'
 import { queryParamsParser } from '../lib/utils'
+import { LangSelect } from './LangSelect'
+
+
+
 
 export const Header = () => {
   const { restaurant, isRestaurantLoading, fetchRestaurant } = useRestaurantStore()
   const fetched = useRef(false)
+
 
   useEffect(() => {
     if (fetched.current) return
@@ -39,7 +44,11 @@ export const Header = () => {
           alt="logo"
           className="w-12 h-12 object-contain"
         />
-        <h1 className="text-3xl font-bold text-center ml-4 pl-5 border-l-1">{restaurant?.name}</h1>
+        <div className='flex items-center justify-between w-full'>
+          <h1 className="text-3xl font-bold text-center ml-4 pl-5 border-l-1 max-w-[80%]">{restaurant?.name}</h1>
+          <LangSelect />
+        </div>
+
       </div>
     </div>
   )
