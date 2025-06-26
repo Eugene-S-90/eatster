@@ -1,9 +1,13 @@
 import { useRestaurantStore } from '../store/useRestorauntStore'
-import { useMemo } from 'react'
+import { useMemo, useEffect, useState, useRef } from 'react'
 import { Skeleton } from './Skeleton'
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
+import clsx from 'clsx'
 
 export const CategoryTabs = () => {
   const { meals, isMealsLoading } = useRestaurantStore()
+  const [activeCategory, setActiveCategory] = useState<string | null>(null);
+  const tabRefs = useRef<{ [key: string]: HTMLAnchorElement | null }>({})
 
   const categories = useMemo(() => {
     const map = new Map<string, { name: string; order: number }>()
@@ -23,6 +27,52 @@ export const CategoryTabs = () => {
       }))
   }, [meals])
 
+  // 👁️ Track what's visible in viewport
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const newId = entry.target.id
+            setActiveCategory(prev => {
+              if (prev !== newId) {
+                return newId
+              }
+              return prev
+            })
+          }
+        })
+      },
+      {
+        rootMargin: '0px 0px -60% 0px', // triggers early
+        threshold: 0.2,
+      }
+    )
+
+    categories.forEach(category => {
+      const section = document.getElementById(category.id)
+      if (section) observer.observe(section)
+    })
+
+    return () => {
+      categories.forEach(category => {
+        const section = document.getElementById(category.id)
+        if (section) observer.unobserve(section)
+      })
+    }
+  }, [categories])
+
+  // 🎯 Auto-center active tab
+  useEffect(() => {
+    if (activeCategory && tabRefs.current[activeCategory]) {
+      tabRefs.current[activeCategory]!.scrollIntoView({
+        behavior: 'smooth',
+        inline: 'center',
+        block: 'nearest',
+      })
+    }
+  }, [activeCategory])
+
   if (isMealsLoading) {
     return (
       <div className="flex gap-4 px-4 py-2 overflow-x-auto mt-2">
@@ -36,19 +86,28 @@ export const CategoryTabs = () => {
   }
 
   return (
-<div className="overflow-x-auto border-b sticky top-0 bg-white z-10 scrollbar-smart">
-  <ul className="flex gap-4 px-4 py-2 whitespace-nowrap">
-    {categories.map((category) => (
-      <li key={category.id}>
-        <a
-          href={`#${category.id}`}
-          className="text-sm font-medium hover:underline text-gray-800"
-        >
-          {category.name}
-        </a>
-      </li>
-    ))}
-  </ul>
-</div>
+    <div className='overflow-x-auto border-b sticky top-0 bg-white z-10 drop-shadow-md'>
+      <ScrollArea className="w-[90%] h-13 mx-auto">
+        <ul className="flex gap-4 px-4 py-2 whitespace-nowrap mt-[5px]">
+          {categories.map((category) => (
+            <li key={category.id}>
+              <a
+                href={`#${category.id}`}
+                ref={el => { tabRefs.current[category.id] = el; }}
+                className={clsx(
+                  "text-md font-medium hover:underline",
+                  activeCategory === category.id
+                    ? "text-green-600 underline"
+                    : "text-grey-800"
+                )}
+              >
+                {category.name}
+              </a>
+            </li>
+          ))}
+        </ul>
+        <ScrollBar orientation="horizontal" />
+      </ScrollArea>
+    </div>
   )
 }

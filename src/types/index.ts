@@ -10,7 +10,8 @@ export type Restaurant = {
 export type Meal = {
   id: number
   name: string
-  price_with_modifiers: number
+  price_with_modifiers: number,
+  price: number,
   weight?: string
   weight_double?: number
   weight_unit?: string

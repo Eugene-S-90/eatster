@@ -2,13 +2,9 @@ import { useRestaurantStore } from '../store/useRestorauntStore'
 import { useMemo } from 'react'
 import { MealCard } from './MealCard'
 import { Skeleton } from './Skeleton'
-import type { Meal } from '../types'
 
-type Props = {
-  onMealImageClick: (meal: Meal) => void
-}
 
-export const CategorySection = ({ onMealImageClick }: Props) => {
+export const CategorySection = () => {
   const { meals, isMealsLoading } = useRestaurantStore();
 
   const grouped = useMemo(() => {
@@ -49,15 +45,15 @@ export const CategorySection = ({ onMealImageClick }: Props) => {
 
 
   return (
-    <>
+    <div className="p-4">
       {grouped.map(({ id, name, meals }) => (
         <section key={id} id={id} className="mb-8 scroll-mt-24">
           <h2 className="text-2xl font-bold mb-4">{name}</h2>
           {meals.map((meal) => (
-            <MealCard key={meal.id} meal={meal} onImageClick={onMealImageClick} />
+            <MealCard key={meal.id} meal={meal} />
           ))}
         </section>
       ))}
-    </>
+    </div>
   )
 }
