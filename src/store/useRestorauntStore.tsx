@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 import type { Restaurant, Meal } from '../types'
-import { fetchRestaurant, fetchMeals } from '../api/fetchMeals'
+import { fetchRestaurant, fetchMeals } from '../api/fetchRestaurantData'
 import { toast } from "sonner"
 
 type CartItem = {

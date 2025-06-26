@@ -16,6 +16,5 @@ export const fetchMeals = async (id: number): Promise<Meal[]> => {
   const url = `${BASE}/meals?restaurant_ids[]=${id}&page=1&per_page=50&meals_for=web&language=en`
   const res = await fetch(url)
   const data = await res.json();
-  console.log('Fetched meals:', data)
   return data.data
 }
