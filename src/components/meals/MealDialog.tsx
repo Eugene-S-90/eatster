@@ -16,7 +16,6 @@ export const MealDialog = () => {
   const weight = currentMeal?.weight_double ?? currentMeal?.weight
   const ingredients = currentMeal?.ingredients?.trim()
 
-  // Sync open state when currentMeal is set
   useEffect(() => {
     if (currentMeal) setOpen(true)
   }, [currentMeal])
@@ -24,19 +23,18 @@ export const MealDialog = () => {
   const handleOpenChange = (value: boolean) => {
     setOpen(value)
     if (!value) {
-      // Delay clearing to allow close animation
       setTimeout(() => {
         setCurrentMeal(null)
-      }, 200) // Match Dialog transition duration
+      }, 200)
     }
   }
   const AddTOCardHandler = () => {
     if (currentMeal) {
       addToCart(currentMeal)
       setOpen(false)
-            setTimeout(() => {
+      setTimeout(() => {
         setCurrentMeal(null)
-      }, 200) // Match Dialog transition duration
+      }, 200)
     }
   }
 
@@ -51,22 +49,27 @@ export const MealDialog = () => {
         </DialogHeader>
 
         {currentMeal?.picture_url && (
-          <img
-            src={currentMeal.picture_url}
-            alt={currentMeal.name}
-            className="w-full h-48 object-cover rounded-md mb-4"
-          />
+          <div className="relative">
+         
+            <img
+              src={currentMeal.picture_url}
+              alt={currentMeal.name}
+              className="w-full h-48 object-cover rounded-md  mb-4"
+            />
+          </div>
+
         )}
 
         <p className="text-gray-500 mb-1">{weight}{currentMeal?.weight_unit}</p>
         {ingredients && (
-          <p className="text-gray-400 mb-4">{ingredients}</p>
+          <p className="text-gray-400 mb-1">{ingredients}</p>
         )}
 
-        <div className="flex justify-end">
+        <div className="w-full">
+             <p className="text-center bg-white p-2 right-5 top-[0px] font-bold text-lg text-black">{currentMeal?.price}€</p>
           <button
             onClick={AddTOCardHandler}
-            className="bg-green-600 hover:bg-green-700 text-white px-4 py-2  font-semibold cursor-pointer">
+            className="w-full bg-green-600 hover:bg-green-700 text-white px-4 py-2  font-semibold cursor-pointer">
             Add to card
           </button>
         </div>

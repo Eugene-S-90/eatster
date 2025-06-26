@@ -11,7 +11,6 @@ export const MealCard = ({ meal }: Props) => {
 
   const { setCurrentMeal, addToCart, removeFromCart, cart } = useRestaurantStore();
 
-  // Find quantity in cart for this meal
   const cartItem = cart.find(item => item.meal.id === meal.id);
   const quantity = cartItem ? cartItem.quantity : 0;
 

@@ -3,6 +3,7 @@ import { useMemo, useEffect, useState, useRef } from 'react'
 import { Skeleton } from '../Skeleton'
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
 import clsx from 'clsx'
+import { groupMealsByCategory } from '../../lib/utils'
 
 export const CategoryTabs = () => {
   const { meals, isMealsLoading } = useRestaurantStore()
@@ -10,21 +11,7 @@ export const CategoryTabs = () => {
   const tabRefs = useRef<{ [key: string]: HTMLAnchorElement | null }>({})
 
   const categories = useMemo(() => {
-    const map = new Map<string, { name: string; order: number }>()
-    for (const meal of meals) {
-      const category = meal.meal_category
-      const key = `category-${category.id}`
-      if (!map.has(key)) {
-        map.set(key, { name: category.name, order: category.order })
-      }
-    }
-
-    return Array.from(map.entries())
-      .sort((a, b) => a[1].order - b[1].order)
-      .map(([id, value]) => ({
-        id,
-        name: value.name,
-      }))
+    return groupMealsByCategory(meals)
   }, [meals])
 
   useEffect(() => {
@@ -84,7 +71,7 @@ export const CategoryTabs = () => {
   }
 
   return (
-    <div className='overflow-x-auto border-b sticky top-0 bg-white z-10 drop-shadow-md'>
+    <section className='overflow-x-auto border-b sticky top-0 bg-white z-10 drop-shadow-md'>
       <ScrollArea className="w-[90%] h-13 mx-auto">
         <ul className="flex gap-4 px-4 py-2 whitespace-nowrap mt-[5px]">
           {categories.map((category) => (
@@ -106,6 +93,6 @@ export const CategoryTabs = () => {
         </ul>
         <ScrollBar orientation="horizontal" />
       </ScrollArea>
-    </div>
+    </section>
   )
 }

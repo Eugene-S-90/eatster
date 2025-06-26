@@ -34,7 +34,7 @@ export const Header = () => {
   }
 
   return (
-    <div
+    <section
       className="relative w-full h-64 bg-cover bg-center"
       style={{ backgroundImage: `url(${restaurant?.picture_url_large})` }}
     >
@@ -50,6 +50,6 @@ export const Header = () => {
         </div>
 
       </div>
-    </div>
+    </section>
   )
 }

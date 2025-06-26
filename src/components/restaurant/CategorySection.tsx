@@ -2,29 +2,14 @@ import { useRestaurantStore } from '../../store/useRestorauntStore'
 import { useMemo } from 'react'
 import { MealCard } from '../meals/MealCard'
 import { Skeleton } from '../Skeleton'
+import { groupMealsByCategory } from '../../lib/utils'
 
 
 export const CategorySection = () => {
   const { meals, isMealsLoading } = useRestaurantStore();
 
   const grouped = useMemo(() => {
-    const map = new Map<string, { name: string; order: number; meals: typeof meals }>()
-    for (const meal of meals) {
-      const category = meal.meal_category
-      const key = `category-${category.id}`
-      if (!map.has(key)) {
-        map.set(key, { name: category.name, order: category.order, meals: [] })
-      }
-      map.get(key)!.meals.push(meal)
-    }
-
-    return Array.from(map.entries())
-      .sort((a, b) => a[1].order - b[1].order)
-      .map(([id, value]) => ({
-        id,
-        name: value.name,
-        meals: value.meals,
-      }))
+    return groupMealsByCategory(meals)
   }, [meals])
 
   if (isMealsLoading) {
@@ -45,7 +30,7 @@ export const CategorySection = () => {
 
 
   return (
-    <div className="p-4">
+    <section className="p-4">
       {grouped.map(({ id, name, meals }) => (
         <section key={id} id={id} className="mb-8 scroll-mt-24">
           <h2 className="text-2xl font-bold mb-4">{name}</h2>
@@ -54,6 +39,6 @@ export const CategorySection = () => {
           ))}
         </section>
       ))}
-    </div>
+    </section>
   )
 }
