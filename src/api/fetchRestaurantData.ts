@@ -1,6 +1,6 @@
 import type { Restaurant, Meal } from '../types/index'
 
-const BASE = 'https://intense-tundra-45319.herokuapp.com/api/v3'
+const BASE = import.meta.env.VITE_API_BASE as string;
 
 export const fetchRestaurantsList = async (): Promise<Restaurant> => {
   const res = await fetch(`${BASE}/restaurants/`)
