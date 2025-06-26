@@ -13,6 +13,7 @@ type RestaurantState = {
   meals: Meal[]
   isMealsLoading: boolean,
   isRestaurantLoading: boolean,
+  restaurantError: string | null,
   currentMeal: Meal | null,
   cart: CartItem[];
   fetchData: (id: number) => Promise<void>
@@ -25,6 +26,7 @@ type RestaurantState = {
 
 export const useRestaurantStore = create<RestaurantState>((set) => ({
   restaurant: null,
+  restaurantError: null,
   meals: [],
   cart: [],
   isMealsLoading: false,
@@ -33,12 +35,19 @@ export const useRestaurantStore = create<RestaurantState>((set) => ({
   setCurrentMeal: (meal: Meal | null) => set({ currentMeal: meal }),
   fetchRestaurant: async (id: number) => {
     set({ isRestaurantLoading: true });
-    const restaurant = await fetchRestaurant(id)
+    const restaurant = await fetchRestaurant(id);
+    if (restaurant && restaurant?.status) {
+      set({ restaurantError: restaurant.errors.message });
+      toast.error(restaurant.errors.message);
+    }
+
+    console.log('fetched restaurant', restaurant)
     set({ restaurant, isRestaurantLoading: false })
   },
   fetchMeals: async (id: number) => {
     set({ isMealsLoading: true });
-    const meals = await fetchMeals(id)
+    const meals = await fetchMeals(id);
+    console.log('fetched meals', meals)
     set({ meals, isMealsLoading: false })
   },
 

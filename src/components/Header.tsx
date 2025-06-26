@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { useRestaurantStore } from '../store/useRestorauntStore'
 import { Skeleton } from './Skeleton'
+import { queryParamsParser } from '../lib/utils'
 
 export const Header = () => {
   const { restaurant, isRestaurantLoading, fetchRestaurant } = useRestaurantStore()
@@ -8,8 +9,15 @@ export const Header = () => {
 
   useEffect(() => {
     if (fetched.current) return
-    fetched.current = true
-    fetchRestaurant(287)
+    fetched.current = true;
+
+    let id = queryParamsParser('id')
+    if (id) {
+      fetchRestaurant(+id)
+    } else {
+      fetchRestaurant(287)
+    }
+
   }, [fetchRestaurant])
 
   if (isRestaurantLoading) {
