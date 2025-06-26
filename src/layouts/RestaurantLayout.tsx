@@ -1,7 +1,15 @@
 
 import { Toaster } from "@/components/ui/sonner"
+import { useRestaurantStore } from "@/store/useRestorauntStore"
+import NotFound from "./NotFound"
 
-export default function RestarauntLayout({ children }: { children: React.ReactNode }) {
+export default function RestauranttLayout({ children }: { children: React.ReactNode }) {
+
+  const { restaurantError } = useRestaurantStore();
+  if (restaurantError) {
+    return <NotFound restaurantError={restaurantError} />
+  }
+
   return (
     <div className="bg-[#129d42]">
       <div className="m-auto w-full max-w-4xl min-h-[100vh] bg-white shadow-lg relative">
