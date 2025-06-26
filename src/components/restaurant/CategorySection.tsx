@@ -1,7 +1,7 @@
-import { useRestaurantStore } from '../store/useRestorauntStore'
+import { useRestaurantStore } from '../../store/useRestorauntStore'
 import { useMemo } from 'react'
-import { MealCard } from './MealCard'
-import { Skeleton } from './Skeleton'
+import { MealCard } from '../meals/MealCard'
+import { Skeleton } from '../Skeleton'
 
 
 export const CategorySection = () => {

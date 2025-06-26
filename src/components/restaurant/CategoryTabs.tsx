@@ -1,6 +1,6 @@
-import { useRestaurantStore } from '../store/useRestorauntStore'
+import { useRestaurantStore } from '../../store/useRestorauntStore'
 import { useMemo, useEffect, useState, useRef } from 'react'
-import { Skeleton } from './Skeleton'
+import { Skeleton } from '../Skeleton'
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
 import clsx from 'clsx'
 

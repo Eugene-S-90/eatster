@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/dialog"
 
 import { useEffect, useState } from "react"
-import { useRestaurantStore } from '../store/useRestorauntStore'
+import { useRestaurantStore } from '../../store/useRestorauntStore'
 
 export const MealDialog = () => {
   const { currentMeal, setCurrentMeal, addToCart } = useRestaurantStore()

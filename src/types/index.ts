@@ -1,7 +1,7 @@
 
 export type Restaurant = {
   status?: string
-  errors?: any,
+  errors?: { message?: string, status?: number },
   id: number
   name: string
   picture_url_large: string

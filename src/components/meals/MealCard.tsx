@@ -1,5 +1,5 @@
-import type { Meal } from '../types'
-import { useRestaurantStore } from '../store/useRestorauntStore'
+import type { Meal } from '../../types'
+import { useRestaurantStore } from '../../store/useRestorauntStore'
 
 type Props = {
   meal: Meal

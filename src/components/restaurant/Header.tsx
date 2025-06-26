@@ -1,8 +1,8 @@
 import { useEffect, useRef } from 'react'
-import { useRestaurantStore } from '../store/useRestorauntStore'
-import { Skeleton } from './Skeleton'
-import { queryParamsParser } from '../lib/utils'
-import { LangSelect } from './LangSelect'
+import { useRestaurantStore } from '../../store/useRestorauntStore'
+import { Skeleton } from '../Skeleton'
+import { queryParamsParser } from '../../lib/utils'
+import { LangSelect } from '../LangSelect'
 
 
 
@@ -16,7 +16,7 @@ export const Header = () => {
     if (fetched.current) return
     fetched.current = true;
 
-    let id = queryParamsParser('id')
+    const id = queryParamsParser('id')
     if (id) {
       fetchRestaurant(+id)
     } else {

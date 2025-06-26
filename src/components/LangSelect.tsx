@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useMemo } from "react"
 import {
   Select,
   SelectTrigger,
@@ -11,9 +11,12 @@ import { useRestaurantStore } from "@/store/useRestorauntStore"
 
 export const LangSelect = () => {
   const { restaurant } = useRestaurantStore()
-  const [selectedLang, setSelectedLang] = useState("")
+  const [selectedLang, setSelectedLang] = useState("");
 
-  const languages = restaurant?.available_languages ?? []
+  const languages = useMemo(
+    () => restaurant?.available_languages ?? [],
+    [restaurant?.available_languages]
+  );
 
   useEffect(() => {
     if (!selectedLang && languages.includes("en")) {

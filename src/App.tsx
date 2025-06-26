@@ -1,11 +1,11 @@
 import { useEffect, useRef } from 'react'
 import { useRestaurantStore } from './store/useRestorauntStore'
-import { Header } from './components/Header'
-import { CategoryTabs } from './components/CategoryTabs'
-import { CategorySection } from './components/CategorySection'
+import { Header } from './components/restaurant/Header'
+import { CategoryTabs } from './components/restaurant/CategoryTabs'
+import { CategorySection } from './components/restaurant/CategorySection'
 import RestarauntLayout from './layouts/RestarauntLayout'
 import ScrollUpButton from './components/ScrollUpButton'
-import { MealDialog } from './components/MealDialog'
+import { MealDialog } from './components/meals/MealDialog'
 import { CartBar } from './components/CartBar'
 import { queryParamsParser } from './lib/utils'
 import NotFound from './layouts/NotFound'
@@ -17,7 +17,7 @@ function App() {
   useEffect(() => {
     if (fetched.current) return
     fetched.current = true;
-    let id = queryParamsParser('id')
+    const id = queryParamsParser('id')
     if (id) {
       fetchMeals(+id);
     } else {

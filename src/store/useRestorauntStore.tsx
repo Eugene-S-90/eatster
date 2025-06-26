@@ -16,7 +16,6 @@ type RestaurantState = {
   restaurantError: string | null,
   currentMeal: Meal | null,
   cart: CartItem[];
-  fetchData: (id: number) => Promise<void>
   fetchRestaurant: (id: number) => Promise<void>
   fetchMeals: (id: number) => Promise<void>
   setCurrentMeal: (meal: Meal | null) => void
@@ -37,8 +36,9 @@ export const useRestaurantStore = create<RestaurantState>((set) => ({
     set({ isRestaurantLoading: true });
     const restaurant = await fetchRestaurant(id);
     if (restaurant && restaurant?.status) {
-      set({ restaurantError: restaurant.errors.message });
-      toast.error(restaurant.errors.message);
+      const errorMessage = restaurant.errors?.message || 'Unknown error';
+      set({ restaurantError: errorMessage });
+      toast.error(errorMessage);
     }
 
     console.log('fetched restaurant', restaurant)
@@ -51,14 +51,6 @@ export const useRestaurantStore = create<RestaurantState>((set) => ({
     set({ meals, isMealsLoading: false })
   },
 
-  fetchData: async (id: number) => {
-    set({ isMealsLoading: true })
-    const [meals] = await Promise.all([
-      // fetchRestaurant(id),
-      fetchMeals(id),
-    ])
-    set({ meals, isMealsLoading: false })
-  },
   addToCart: (meal) => {
     toast.success(`${meal.name} added to cart`)
     set((state) => {
