@@ -8,6 +8,7 @@ export const CartBar = () => {
 
     return (
         <div className="
+        max-w-4xl mx-auto 
         fixed left-0 right-0 bottom-2 z-50
         flex justify-center
         transition-transform duration-300

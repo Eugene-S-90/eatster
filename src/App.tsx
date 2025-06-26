@@ -17,7 +17,6 @@ function App() {
     fetched.current = true
     fetchMeals(287);
   }, [fetchMeals])
-
   return (
     <RestarauntLayout>
       <Header />

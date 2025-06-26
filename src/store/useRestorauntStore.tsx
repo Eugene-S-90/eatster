@@ -1,6 +1,7 @@
 import { create } from 'zustand'
 import type { Restaurant, Meal } from '../types'
 import { fetchRestaurant, fetchMeals } from '../api/fetchMeals'
+import { toast } from "sonner"
 
 type CartItem = {
   meal: Meal;
@@ -50,6 +51,7 @@ export const useRestaurantStore = create<RestaurantState>((set) => ({
     set({ meals, isMealsLoading: false })
   },
   addToCart: (meal) => {
+    toast.success(`${meal.name} added to cart`)
     set((state) => {
       const existing = state.cart.find((item) => item.meal.id === meal.id);
       if (existing) {
@@ -65,20 +67,20 @@ export const useRestaurantStore = create<RestaurantState>((set) => ({
     });
   },
   removeFromCart: (meal) => {
-  set((state) => {
-    const existing = state.cart.find((item) => item.meal.id === meal.id);
-    if (!existing) return {};
-    if (existing.quantity === 1) {
-      return { cart: state.cart.filter((item) => item.meal.id !== meal.id) };
-    }
-    return {
-      cart: state.cart.map((item) =>
-        item.meal.id === meal.id
-          ? { ...item, quantity: item.quantity - 1 }
-          : item
-      ),
-    };
-  });
-},
+    set((state) => {
+      const existing = state.cart.find((item) => item.meal.id === meal.id);
+      if (!existing) return {};
+      if (existing.quantity === 1) {
+        return { cart: state.cart.filter((item) => item.meal.id !== meal.id) };
+      }
+      return {
+        cart: state.cart.map((item) =>
+          item.meal.id === meal.id
+            ? { ...item, quantity: item.quantity - 1 }
+            : item
+        ),
+      };
+    });
+  },
 
 }))

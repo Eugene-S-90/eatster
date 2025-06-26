@@ -27,7 +27,6 @@ export const CategoryTabs = () => {
       }))
   }, [meals])
 
-  // 👁️ Track what's visible in viewport
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -62,7 +61,6 @@ export const CategoryTabs = () => {
     }
   }, [categories])
 
-  // 🎯 Auto-center active tab
   useEffect(() => {
     if (activeCategory && tabRefs.current[activeCategory]) {
       tabRefs.current[activeCategory]!.scrollIntoView({
