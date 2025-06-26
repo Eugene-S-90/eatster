@@ -17,7 +17,7 @@ export const CartBar = () => {
       "
         >
             <button
-                onClick={() => alert('Payment logick here')}
+                onClick={() => alert('Payment logic here')}
                 className="bg-green-600 text-white font-bold text-md w-[60%] px-8 py-4 shadow-lg mb-0 cursor-pointer" >
 
                 Payment&nbsp;&nbsp;{total.toFixed(2)} €
