@@ -1,4 +1,4 @@
-import type { Restaurant, Meal } from '../types/index'
+import type { Restaurant, Product } from '../types/index'
 
 const BASE = import.meta.env.VITE_API_BASE as string;
 
@@ -12,7 +12,7 @@ export const fetchRestaurant = async (id: number): Promise<Restaurant> => {
   return res.json()
 }
 
-export const fetchMeals = async (id: number): Promise<Meal[]> => {
+export const fetchMeals = async (id: number): Promise<Product[]> => {
   const url = `${BASE}/meals?restaurant_ids[]=${id}&page=1&per_page=50&meals_for=web&language=en`
   const res = await fetch(url)
   const data = await res.json();

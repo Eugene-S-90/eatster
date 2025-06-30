@@ -2,7 +2,7 @@ import { useRestaurantStore } from '../store/useRestorauntStore'
 
 export const CartBar = () => {
     const cart = useRestaurantStore((state) => state.cart)
-    const total = cart.reduce((sum, item) => sum + (item.meal.price * item.quantity), 0)
+    const total = cart.reduce((sum, item) => sum + (item.product.price * item.quantity), 0)
 
     if (cart.length === 0) return null
 

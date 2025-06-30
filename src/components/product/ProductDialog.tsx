@@ -9,8 +9,8 @@ import {
 import { useEffect, useState } from "react"
 import { useRestaurantStore } from '../../store/useRestorauntStore'
 
-export const MealDialog = () => {
-  const { currentMeal, setCurrentMeal, addToCart } = useRestaurantStore()
+export const ProductDialog = () => {
+  const { currentMeal, setCurrentProduct, addToCart } = useRestaurantStore()
   const [open, setOpen] = useState(false)
 
   const weight = currentMeal?.weight_double ?? currentMeal?.weight
@@ -24,7 +24,7 @@ export const MealDialog = () => {
     setOpen(value)
     if (!value) {
       setTimeout(() => {
-        setCurrentMeal(null)
+        setCurrentProduct(null)
       }, 200)
     }
   }
@@ -33,7 +33,7 @@ export const MealDialog = () => {
       addToCart(currentMeal)
       setOpen(false)
       setTimeout(() => {
-        setCurrentMeal(null)
+        setCurrentProduct(null)
       }, 200)
     }
   }
@@ -44,7 +44,7 @@ export const MealDialog = () => {
         <DialogHeader>
           <DialogTitle className="text-xl">{currentMeal?.name}</DialogTitle>
           <DialogDescription>
-            Customize your meal or view more info
+            Customize your product or view more info
           </DialogDescription>
         </DialogHeader>
 

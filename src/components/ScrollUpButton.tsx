@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-const ScrollUpButton = () => {
+ export const ScrollUpButton = () => {
     const [isVisible, setIsVisible] = useState<boolean>(false);
 
     const toggleVisibility = () => {
@@ -41,4 +41,3 @@ const ScrollUpButton = () => {
     );
 };
 
-export default ScrollUpButton;

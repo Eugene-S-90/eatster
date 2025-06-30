@@ -9,7 +9,7 @@ export type Restaurant = {
   available_languages: string[]
 }
 
-export type Meal = {
+export type Product = {
   id: number
   name: string
   price_with_modifiers: number,

@@ -1,16 +1,16 @@
 import { useRestaurantStore } from '../../store/useRestorauntStore'
 import { useMemo } from 'react'
-import { MealCard } from '../meals/MealCard'
+import { ProductCard } from '../product/ProductCard'
 import { Skeleton } from '../Skeleton'
-import { groupMealsByCategory } from '../../lib/utils'
+import { groupProductsByCategory } from '../../lib/utils'
 
 
 export const CategorySection = () => {
-  const { meals, isMealsLoading } = useRestaurantStore();
+  const { products, isMealsLoading } = useRestaurantStore();
 
-  const grouped = useMemo(() => {
-    return groupMealsByCategory(meals)
-  }, [meals])
+  const categories = useMemo(() => {
+    return groupProductsByCategory(products)
+  }, [products])
 
   if (isMealsLoading) {
     return (
@@ -31,11 +31,11 @@ export const CategorySection = () => {
 
   return (
     <section className="p-4">
-      {grouped.map(({ id, name, meals }) => (
+      {categories.map(({ id, name, products }) => (
         <section key={id} id={id} className="mb-8 scroll-mt-24">
           <h2 className="text-2xl font-bold mb-4">{name}</h2>
-          {meals.map((meal) => (
-            <MealCard key={meal.id} meal={meal} />
+          {products.map((product) => (
+            <ProductCard key={product.id} product={product} />
           ))}
         </section>
       ))}

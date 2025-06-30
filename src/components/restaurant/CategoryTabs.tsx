@@ -3,16 +3,16 @@ import { useMemo, useEffect, useState, useRef } from 'react'
 import { Skeleton } from '../Skeleton'
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
 import clsx from 'clsx'
-import { groupMealsByCategory } from '../../lib/utils'
+import { groupProductsByCategory } from '../../lib/utils'
 
 export const CategoryTabs = () => {
-  const { meals, isMealsLoading } = useRestaurantStore()
+  const { products, isMealsLoading } = useRestaurantStore()
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const tabRefs = useRef<{ [key: string]: HTMLAnchorElement | null }>({})
 
   const categories = useMemo(() => {
-    return groupMealsByCategory(meals)
-  }, [meals])
+    return groupProductsByCategory(products)
+  }, [products])
 
   useEffect(() => {
     const observer = new IntersectionObserver(
