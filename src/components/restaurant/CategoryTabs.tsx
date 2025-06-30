@@ -1,4 +1,4 @@
-import { useRestaurantStore } from '../../store/useRestaurantStore'
+import { useRestaurantStore } from '@/store/useRestaurantStore'
 import { useMemo, useEffect, useState, useRef } from 'react'
 import { Skeleton } from '../Skeleton'
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
