@@ -1,4 +1,4 @@
-import { useRestaurantStore } from '../../store/useRestorauntStore'
+import { useRestaurantStore } from '../../store/useRestaurantStore'
 import { useMemo } from 'react'
 import { ProductCard } from '../product/ProductCard'
 import { Skeleton } from '../Skeleton'
@@ -6,13 +6,13 @@ import { groupProductsByCategory } from '../../lib/utils'
 
 
 export const CategorySection = () => {
-  const { products, isMealsLoading } = useRestaurantStore();
+  const { products, isProductsLoading } = useRestaurantStore();
 
   const categories = useMemo(() => {
     return groupProductsByCategory(products)
   }, [products])
 
-  if (isMealsLoading) {
+  if (isProductsLoading) {
     return (
       <div className="p-4 space-y-6">
         {Array(2)

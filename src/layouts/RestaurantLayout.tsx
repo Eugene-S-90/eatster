@@ -1,6 +1,6 @@
 
 import { Toaster } from "@/components/ui/sonner"
-import { useRestaurantStore } from "@/store/useRestorauntStore"
+import { useRestaurantStore } from "@/store/useRestaurantStore"
 import NotFound from "./NotFound"
 
 export default function RestauranttLayout({ children }: { children: React.ReactNode }) {

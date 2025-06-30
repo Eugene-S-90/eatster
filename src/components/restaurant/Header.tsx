@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { useRestaurantStore } from '../../store/useRestorauntStore'
+import { useRestaurantStore } from '../../store/useRestaurantStore'
 import { Skeleton } from '../Skeleton'
 import { queryParamsParser } from '../../lib/utils'
 import { LangSelect } from '../LangSelect'

@@ -7,7 +7,7 @@ import {
   SelectGroup,
   SelectItem,
 } from "@/components/ui/select"
-import { useRestaurantStore } from "@/store/useRestorauntStore"
+import { useRestaurantStore } from "@/store/useRestaurantStore"
 
 export const LangSelect = () => {
   const { restaurant } = useRestaurantStore()

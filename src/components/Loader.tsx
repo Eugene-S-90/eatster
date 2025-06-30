@@ -1,10 +1,10 @@
 
-import { useRestaurantStore } from '../store/useRestorauntStore';
+import { useRestaurantStore } from '@/store/useRestaurantStore';
 
 export const Loader = () => {
-    const { isMealsLoading, isRestaurantLoading } = useRestaurantStore();
+    const { isProductsLoading, isRestaurantLoading } = useRestaurantStore();
 
-    const isLoading = isMealsLoading || isRestaurantLoading;
+    const isLoading = isProductsLoading || isRestaurantLoading;
 
     return <>
         {isLoading ? <div className="fixed inset-0 flex items-center justify-center bg-[rgba(255,255,255,0.3)] z-50">

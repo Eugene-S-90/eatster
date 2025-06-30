@@ -1,4 +1,4 @@
-import { useRestaurantStore } from '../../store/useRestorauntStore'
+import { useRestaurantStore } from '../../store/useRestaurantStore'
 import { useMemo, useEffect, useState, useRef } from 'react'
 import { Skeleton } from '../Skeleton'
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
@@ -6,7 +6,7 @@ import clsx from 'clsx'
 import { groupProductsByCategory } from '../../lib/utils'
 
 export const CategoryTabs = () => {
-  const { products, isMealsLoading } = useRestaurantStore()
+  const { products, isProductsLoading } = useRestaurantStore()
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const tabRefs = useRef<{ [key: string]: HTMLAnchorElement | null }>({})
 
@@ -58,7 +58,7 @@ export const CategoryTabs = () => {
     }
   }, [activeCategory])
 
-  if (isMealsLoading) {
+  if (isProductsLoading) {
     return (
       <div className="flex gap-4 px-4 py-2 overflow-x-auto mt-2">
         {Array(6)

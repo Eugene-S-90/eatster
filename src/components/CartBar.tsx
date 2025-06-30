@@ -1,7 +1,7 @@
-import { useRestaurantStore } from '../store/useRestorauntStore'
+import { useCartStore } from '../store/useCartStore'
 
 export const CartBar = () => {
-    const cart = useRestaurantStore((state) => state.cart)
+    const cart = useCartStore((state) => state.cart)
     const total = cart.reduce((sum, item) => sum + (item.product.price * item.quantity), 0)
 
     if (cart.length === 0) return null

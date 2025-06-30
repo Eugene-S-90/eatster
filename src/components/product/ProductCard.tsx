@@ -1,5 +1,6 @@
 import type { Product } from '../../types'
-import { useRestaurantStore } from '../../store/useRestorauntStore'
+import { useRestaurantStore } from '../../store/useRestaurantStore'
+import { useCartStore } from '../../store/useCartStore'
 
 type Props = {
   product: Product
@@ -9,10 +10,11 @@ export const ProductCard = ({ product }: Props) => {
   const weight = product.weight_double ?? product.weight
   const ingredients = product.ingredients?.trim();
 
-  const { setCurrentProduct, addToCart, removeFromCart, cart } = useRestaurantStore();
-
+  const { setCurrentProduct } = useRestaurantStore();
+  const { addToCart, removeFromCart, cart } = useCartStore();
   const cartItem = cart.find(item => item.product.id === product.id);
   const quantity = cartItem ? cartItem.quantity : 0;
+
 
   return (
     <div
@@ -44,7 +46,7 @@ export const ProductCard = ({ product }: Props) => {
         </div>
       </div>
 
-  <div className="flex flex-col justify-between items-center h-full">
+      <div className="flex flex-col justify-between items-center h-full">
         <p className="font-bold text-lg text-black">{product?.price}€</p>
         {quantity === 0 ? (
           <button
