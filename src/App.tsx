@@ -1,22 +1,20 @@
 
-import { Header } from './components/restaurant/Header'
-import { RestaurantContentWrapper } from './components/restaurant/RestaurantContentWrapper'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 import RestaurantLayout from './layouts/RestaurantLayout'
-import { ScrollUpButton } from './components/ScrollUpButton'
-import { ProductDialog } from './components/product/ProductDialog'
-import { CartBar } from './components/CartBar'
-import { Loader } from './components/Loader'
+import RestaurantPage from "./pages/Restaurant";
 
 function App() {
   return (
-    <RestaurantLayout>
-      <Header />
-      <RestaurantContentWrapper />
-      <ProductDialog />
-      <ScrollUpButton />
-      <CartBar />
-      <Loader />
-    </RestaurantLayout>
+    <BrowserRouter>
+      <RestaurantLayout>
+        <Routes>
+          <Route index path="/restaurant" element={<RestaurantPage />} />
+          <Route path="/stadium" element={"STADIUM PAGE"} />
+          <Route path="/train" element={"TRAIN PAGE"} />
+        </Routes>
+      </RestaurantLayout>
+    </BrowserRouter>
   )
 }
 
